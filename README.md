@@ -39,7 +39,7 @@ npm run job:daily
 ```
 
 ## Seed data (from current dev cache)
-The repo includes a snapshot of the current dev cache in `apps/api/prisma/seed-data/`.\n+\n+- Export fresh seed data from your current DB:\n+\n+```bash\n+cd /Users/christopherperet/code_projects/webapps/stockticker\n+DATABASE_URL='postgresql://postgres:postgres@localhost:5432/stockticker' npm run -w @stockticker/api seed:export\n+```\n+\n+- Reset DB and re-seed (uses Prisma seed):\n+\n+```bash\n+cd /Users/christopherperet/code_projects/webapps/stockticker\n+DATABASE_URL='postgresql://postgres:postgres@localhost:5432/stockticker' npx -w @stockticker/api prisma migrate reset --force\n+```\n+
+The repo includes a snapshot of the current dev cache in `apps/api/prisma/seed-data/`.\n+\n+- Export fresh seed data from your current DB:\n+\n+```bash\n+cd stockticker\n+DATABASE_URL='postgresql://postgres:postgres@localhost:5432/stockticker' npm run -w @stockticker/api seed:export\n+```\n+\n+- Reset DB and re-seed (uses Prisma seed):\n+\n+```bash\n+cd stockticker\n+DATABASE_URL='postgresql://postgres:postgres@localhost:5432/stockticker' npx -w @stockticker/api prisma migrate reset --force\n+```\n+
 ## Render deployment
 This repo includes `render.yaml`:
 - **`stockticker-api`** (Docker): runs migrations on startup, serves `/api/*` and `/health`.
