@@ -2,6 +2,8 @@
 
 This app satisfies the TensorWave stock challenge by showing **15+ tracked stocks** on the homepage and a **stock details** page with cached **Company Overview** + **TIME_SERIES_DAILY** history (including day-over-day % change). The key constraint is AlphaVantage’s **25 requests/day** limit, so the app uses a **Postgres cache** refreshed by a **single daily cron job**.
 
+## **Live Project** [**HERE**](https://stockticker-web.onrender.com/)
+
 ## Architecture
 - **`apps/web`**: Next.js (App Router) UI. Never calls AlphaVantage directly.
 - **`apps/api`**: Express API backed by Postgres (Prisma). Serves cached data only.
