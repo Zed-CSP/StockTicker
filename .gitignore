@@ -1,3 +1,20 @@
+node_modules
+**/node_modules
+.env
+.env.local
+.DS_Store
+
+# Next
+.next
+**/.next
+
+# API build
+dist
+**/dist
+
+# Prisma
+**/.prisma
+
 # Logs
 logs
 *.log

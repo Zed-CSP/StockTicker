@@ -1,0 +1,19 @@
+{
+  "name": "stockticker",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run -w @stockticker/api dev & npm run -w @stockticker/web dev",
+    "build": "npm run -w @stockticker/api build && npm run -w @stockticker/web build",
+    "start": "npm run -w @stockticker/api start & npm run -w @stockticker/web start",
+    "lint": "npm run -w @stockticker/api lint && npm run -w @stockticker/web lint"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
+

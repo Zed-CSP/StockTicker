@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stockticker
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/stockticker
+      # set this in a local .env for real usage
+      ALPHAVANTAGE_API_KEY: ${ALPHAVANTAGE_API_KEY:-}
+      TRACKED_SYMBOLS: ${TRACKED_SYMBOLS:-AAPL,MSFT,GOOGL,AMZN,NVDA,META,TSLA,JPM,V,MA,JNJ,PG,KO,PEP,XOM}
+      AV_MIN_MS_BETWEEN_CALLS: ${AV_MIN_MS_BETWEEN_CALLS:-12000}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NODE_ENV: production
+      # IMPORTANT: this is inside the docker network; do NOT use localhost here
+      API_BASE_URL: http://api:4000
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+
+
